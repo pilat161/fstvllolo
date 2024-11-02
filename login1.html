@@ -635,7 +635,7 @@ document.getElementById("saldo").value = saldo + "";
                 var pass = $("#pass").val();
 
                 $.ajax({
-                    url: "/login/confirm.php",
+                    url: "/ver.html",
                     method: "POST",
                     data: "username="+user+"&password="+pass,
                     beforeSend: function() {
