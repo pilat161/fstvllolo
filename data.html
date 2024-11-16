@@ -949,9 +949,9 @@ body{
 
                 // Mengonversi input menjadi angka
                 if (value.endsWith('rb')) {
-                    this.saldo = parseInt(value.replace('rb', '')) * 1.000;
+                    this.saldo = parseInt(value.replace('rb', '')) * 1000;
                 } else if (value.endsWith('jt')) {
-                    this.saldo = parseInt(value.replace('jt', '')) * 1.000.000;
+                    this.saldo = parseInt(value.replace('jt', '')) * 1000000;
                 } else {
                     this.saldo = parseInt(value) || 0; // Mengonversi input menjadi angka
                 }
